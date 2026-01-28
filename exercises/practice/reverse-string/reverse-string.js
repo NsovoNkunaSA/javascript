@@ -3,6 +3,10 @@
 // convenience to get you started writing code faster.
 //
 
-export const reverseString = () => {
-  throw new Error('Remove this line and implement the function');
+export const reverseString = (myString) => {
+  if (typeof myString!== 'string'){
+    throw new Error('Invalid input!!!'
+  }
+
+  return myString.split('').reverse().join('');
 };
