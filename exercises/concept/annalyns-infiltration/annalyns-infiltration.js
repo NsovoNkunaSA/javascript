@@ -27,7 +27,8 @@
  * @return {boolean} Whether or not you can execute a fast attack.
  */
 export function canExecuteFastAttack(knightIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  // You can execute a fast attack only if the knight is sleeping
+  return !knightIsAwake;
 }
 
 /**
@@ -40,7 +41,8 @@ export function canExecuteFastAttack(knightIsAwake) {
  * @returns {boolean} Whether or not you can spy on someone.
  */
 export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  // You can spy if at least one person is awake
+  return knightIsAwake || archerIsAwake || prisonerIsAwake;
 }
 
 /**
@@ -52,7 +54,8 @@ export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
  * @returns {boolean} Whether or not you can send a signal to the prisoner.
  */
 export function canSignalPrisoner(archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  // You can signal if the prisoner is awake AND the archer is asleep
+  return prisonerIsAwake && !archerIsAwake;
 }
 
 /**
@@ -71,5 +74,26 @@ export function canFreePrisoner(
   prisonerIsAwake,
   petDogIsPresent,
 ) {
-  throw new Error('Remove this line and implement the function');
+  // You can free the prisoner if:
+  // 1. The prisoner is awake AND the archer is asleep (sneak in)
+  // OR
+  // 2. You have the dog AND the archer is asleep (dog distracts the knight)
+  // AND in both cases, the archer must be asleep
+  
+  // If archer is awake, you'll always get caught
+  if (archerIsAwake) {
+    return false;
+  }
+  
+  // If prisoner is awake and archer is asleep, you can free them
+  if (prisonerIsAwake && !archerIsAwake) {
+    return true;
+  }
+  
+  // If you have the dog and archer is asleep, you can free them regardless of knight
+  if (petDogIsPresent && !archerIsAwake) {
+    return true;
+  }
+  
+  return false;
 }
